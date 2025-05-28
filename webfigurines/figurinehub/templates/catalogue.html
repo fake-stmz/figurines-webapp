@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог | Figurine Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #2A3151;">
+    
+    <header>
+        <nav class="uk-navbar-container" style="background-color: #F8B0ED;" uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="/" style="color: black;">Figurine Hub</a>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li><a href="/catalogue" style="color: black;">Каталог</a></li>
+                    <li><a href="#" style="color: black;">Отзывы</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+        <div class="uk-margin-top uk-margin-left uk-margin-right">
+            <form class="uk-search uk-search-default uk-flex uk-width-1-1">
+                <span uk-search-icon></span>
+                <input class="uk-search-input uk-width-1-1 uk-border-pill" type="search" placeholder="Поиск" name="search" {% if search %}value={{search}}{% endif %} style="border: 3px solid #F8B0ED; color: white;">
+                <button class="uk-button uk-button-default uk-margin-left uk-border-pill" type="submit" style="border: none; background-color: #F8B0ED">Найти</button>
+            </form>
+        </div>
+
+        <div class="uk-margin-top uk-margin-left uk-margin-right uk-flex">
+            <div class="uk-width-1-4">
+                <form class="uk-border-rounded uk-padding-small uk-text-center" style="border: 3px solid #F8B0ED; background-color: #564671;">
+                    <div>
+                        <label for="sort" class="uk-form-label" style="color: white; font-size: 24px;">Сортировать по:</label>
+                        <select class="uk-select uk-margin-top" name="sort">
+                            <option value="" {% if not sort %}selected{% endif %}>Выберите сортировку</option>
+                            <option value="price_asc" {% if sort == "price_asc" %}selected{% endif %}>По возрастанию цены</option>
+                            <option value="price_desc" {% if sort == "price_desc" %}selected{% endif %}>По убыванию цены</option>
+                            <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>По названию (A-Z)</option>
+                            <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>По названию (Z-A)</option>
+                        </select>
+                    </div>
+                    <div class="uk-margin-top">
+                        <button class="uk-button uk-border-pill uk-width-1-1" type="submit" style="border: none; background-color: #F8B0ED; color: black;">Применить</button>
+                    </div>
+                </form>
+            </div>
+            <div class="uk-width-3-4 uk-margin-left">
+                <div class="uk-grid uk-child-width-1-3@m" uk-grid>
+                    {% for figurine in figurines %}
+                        <div>
+                            <div class="uk-card uk-card-default uk-text-center uk-border-rounded" style="border: 3px solid #F8B0ED;">
+                                <div class="uk-card-media-top">
+                                    <img src="{{ figurine.image_url }}" alt="{{ figurine.name }}" style="width: 100%; height: auto; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                                </div>
+                                <div class="uk-card-body" style="background-color: #564671; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                                    <h3 class="uk-card-title" style="color: white;">{{ figurine.name }}</h3>
+                                    <p style="color: white;">Цена: {{ figurine.price }} руб.</p>
+                                    <a href="#" class="uk-button uk-button-default uk-border-pill uk-width-1-1" style="border: none; background-color: #F8B0ED; color: black;">Купить</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="uk-section uk-padding-small uk-margin-top" style="background-color: #F8B0ED;">
+        <h3 style="color: black;">Наши соц. сети: <a href="" uk-icon="icon: facebook"></a> <a href="" uk-icon="icon:  tiktok"></a> <a href="" uk-icon="icon: instagram"></a></h1>
+    </footer>
+</body>
+</html>
